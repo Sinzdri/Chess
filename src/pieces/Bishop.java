@@ -1,7 +1,7 @@
 package pieces;
 
+import enums.Type;
 import game.Player;
-import game.Type;
 
 public class Bishop extends Piece {
 	Type type;
@@ -12,8 +12,10 @@ public class Bishop extends Piece {
 	}
 	
 	public boolean isPathValid(int finalX, int finalY) {
-		return false;
-		
+//		return finalX - x == finalY - y;
+		int x_difference = finalX - x;
+		int y_difference = finalY - y;
+		return x_difference == y_difference;
 	}
 	
 

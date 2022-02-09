@@ -1,8 +1,8 @@
 package pieces;
+import enums.Type;
 import game.Player;
-import game.Type;
 
-
+//establish abstract piece class that all pieces will inherit from, every piece should have an integer location (x,y) and be associated with a player.
 public abstract class Piece {
 	public int x, y;
 	public Player player;
@@ -15,6 +15,6 @@ public abstract class Piece {
 	}
 	
 	//methods
-	public abstract boolean isPathValid(int finalX, int finalY);
-	public abstract Type getType();
+	public abstract boolean isPathValid(int finalX, int finalY); //method to determine if piece can make the move
+	public abstract Type getType(); //method to get piece type
 }
