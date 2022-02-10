@@ -12,8 +12,10 @@ public class Rook extends Piece {
 	}
 	
 	public boolean isPathValid(int finalX, int finalY) {
-		return false;
-		
+		if(finalX == x || finalY == y) {	//as long as only moving in one dimension should be a valid rook move
+			return true;
+		}
+		else return false;
 	}
 	
 

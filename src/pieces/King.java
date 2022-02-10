@@ -12,7 +12,12 @@ public class King extends Piece {
 	}
 	
 	public boolean isPathValid(int finalX, int finalY) {
-		return false;
+		int x_difference = finalX - x;
+		int y_difference = finalY - y;
+		if (x_difference <= 1 && y_difference <=1 ) {
+			return true;}
+		else return false;
+		
 		
 	}
 	

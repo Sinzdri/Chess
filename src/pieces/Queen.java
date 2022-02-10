@@ -12,9 +12,15 @@ public class Queen extends Piece {
 	}
 	
 	public boolean isPathValid(int finalX, int finalY) {
-		return false;
-		
-	}
+		int x_difference = finalX - x;
+		int y_difference = finalY - y;
+		if (x_difference == y_difference) {
+			return true;}
+		else if (x_difference == 0 || y_difference == 0) {
+			return true;}
+		else return false;
+		}
+
 	
 
 	public Type getType() {
