@@ -1,3 +1,3 @@
 # Chess
-Chess project
+Chess project.
 Currently still very WIP and non-functional.
