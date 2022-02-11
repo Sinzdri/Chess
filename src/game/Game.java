@@ -16,7 +16,7 @@ public Game() {
 public void setupGame() {
 	setupPlayers(); //setup the players
 	gameBoard = new Board(8,8, this); //setup a game with players and chess board
-	gameBoard.createPieces(); //should setup pieces
+	gameBoard.setBoard(); //should setup pieces
 	turn = 1;
 }
 
