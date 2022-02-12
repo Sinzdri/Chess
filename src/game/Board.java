@@ -5,26 +5,27 @@ import java.util.ArrayList;
 import pieces.*;
 
 public class Board {
-	public int height, width;
-	public Piece[][] boardArray;	// a two-dimensional array to track pieces
-	public Game game;
-	public ArrayList<Piece> whitePieces = new ArrayList<Piece>(16);	//arraylist of each colours pieces, starting size 16, depending on future usage could be single arraylist
-	public ArrayList<Piece> blackPieces = new ArrayList<Piece>(16);
+	private int height, width;
+	private Piece[][] boardArray;	// a two-dimensional array to track pieces
+	private Game game;
+	private ArrayList<Piece> whitePieces = new ArrayList<Piece>(16);	//arraylist of each colours pieces, starting size 16, depending on future usage could be single arraylist
+	private ArrayList<Piece> blackPieces = new ArrayList<Piece>(16);
 	
-	
+	//Board Constructor
 	public Board(int height, int width, Game game) {
 		this.height = height;
 		this.width = width;
 		this.game = game;
 		boardArray = new Piece[height][width];
 	}
-	
-	public void setBoard() {
+	//Board methods
+	public void setBoard() {	//setBoard maybe not best naming choice (confusion with setters)?
 		createPlayer1Pieces();
 		createPlayer2Pieces();
 		placePieces();
 	}
-	public void createPlayer1Pieces() {
+	//Method to create white pieces and add them to their arraylist
+	public void createPlayer1Pieces() {	
 		for(int i=0; i <= 7; i++) {
 			whitePieces.add(new Pawn(i, 1, this.game.player1));
 		}
@@ -39,6 +40,7 @@ public class Board {
 		whitePieces.add(new Bishop(5, 0, this.game.player1));
 		
 	}
+	//Method to create black pieces and add them to their arraylist.
 	public void createPlayer2Pieces() {
 		for(int i=0; i <= 7; i++) {
 			blackPieces.add(new Pawn(i, 6, this.game.player1));
@@ -53,24 +55,32 @@ public class Board {
 		blackPieces.add(new Bishop(2, 7, this.game.player1));
 		blackPieces.add(new Bishop(5, 7, this.game.player1));
 		
-		
 	}
-	
+
+	//Method that uses the arraylists of pieces to populate the 2 dimension board array
     public void placePieces()
     {
         for(Piece p : whitePieces) {
-        	boardArray[p.getX()][p.getY()] = p;	//should replace with methods rather than direct call
+        	boardArray[p.getX()][p.getY()] = p;	
         }
         for(Piece p : blackPieces) {
-        	boardArray[p.getX()][p.getY()] = p;	//should replace with methods rather than direct call
+        	boardArray[p.getX()][p.getY()] = p;	
         }
 
 
     }
 	
+    //Piece moving methods below (Maybe split into own class)
+    //Combined method that checks if move is valid for generic piece, and then if path is valid for that specific piece. 
+    //Todo add logic for taking pieces, need to record them in an arraylist (reuse white black pieces arraylist by having it wiped after initial use?)
 	public void movePiece(Piece piece, int finalX, int finalY) {
 		if(isMoveValid(piece, finalX, finalY) && piece.isPathValid(finalX, finalY)) {
-			
+			int originX = piece.getX();
+			int originY = piece.getY();
+			piece.setX(finalX); 
+			piece.setY(finalY);
+			boardArray[finalX][finalY] = piece;			
+			boardArray[originX][originY] = null;			
 		}
 	}
 	
@@ -83,6 +93,7 @@ public class Board {
 		else return false;
 	}
 	
+	//method to check not moving into occupied friendly space
 	public boolean isNotFriend(Piece piece, int finalX, int finalY) {
 		if (piece.getPlayer() == this.game.player1) {
 		if (boardArray[piece.getX()][piece.getY()] != null) {
@@ -103,18 +114,24 @@ public class Board {
 		}
 		return true;
 	}
-
+	
+	//method to check not leaving confines of the board
 	public boolean isOnBoard(Piece piece, int finalX, int finalY) {	
 		if((0 <= finalX && finalX < width) && (0 <= finalY && finalY < height)) {
 			return true;
 		}
 		else return false;
 	}
-	
+	//method to check actually changing location
 	public boolean isActuallyMoved(Piece piece, int finalX, int finalY) {
 		if((finalX == piece.getX()) && (finalY == piece.getY())) {
 			return true;
 		}
 		else return false;
 	}
+	
+	public Piece[][] getBoardArray() {
+		return boardArray;
+	}
+	
 }
