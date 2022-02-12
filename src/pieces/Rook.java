@@ -4,7 +4,7 @@ import enums.Type;
 import game.Player;
 
 public class Rook extends Piece {
-	Type type;
+	private Type type;
 
 	public Rook(int x, int y, Player player) {
 		super(x, y, player);
@@ -12,7 +12,7 @@ public class Rook extends Piece {
 	}
 	
 	public boolean isPathValid(int finalX, int finalY) {
-		if(finalX == x || finalY == y) {	//as long as only moving in one dimension should be a valid rook move
+		if(finalX == getX() || finalY == getY()) {	//as long as only moving in one dimension should be a valid rook move
 			return true;
 		}
 		else return false;

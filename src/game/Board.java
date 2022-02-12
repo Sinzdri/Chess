@@ -59,10 +59,10 @@ public class Board {
     public void placePieces()
     {
         for(Piece p : whitePieces) {
-        	boardArray[p.x][p.y] = p;	//should replace with methods rather than direct call
+        	boardArray[p.getX()][p.getY()] = p;	//should replace with methods rather than direct call
         }
         for(Piece p : blackPieces) {
-        	boardArray[p.x][p.y] = p;	//should replace with methods rather than direct call
+        	boardArray[p.getX()][p.getY()] = p;	//should replace with methods rather than direct call
         }
 
 
@@ -77,7 +77,42 @@ public class Board {
 	//use to check validity of move in general regardless of piece type (in the board etc.), need to expand (break into seperate methods) to also cover if destination is the same as origin
 	//and if destination is occupied (if friendly piece not valid if enemy need capture method).
 	public boolean isMoveValid(Piece piece, int finalX, int finalY) {	
+		if((isOnBoard(piece, finalX, finalY)) && (isActuallyMoved(piece, finalX, finalY)) && (isNotFriend(piece, finalX, finalY))) {
+			return true;
+		}
+		else return false;
+	}
+	
+	public boolean isNotFriend(Piece piece, int finalX, int finalY) {
+		if (piece.getPlayer() == this.game.player1) {
+		if (boardArray[piece.getX()][piece.getY()] != null) {
+			if (boardArray[piece.getX()][piece.getY()].getPlayer().equals(this.game.player1)){
+				return false;
+			}
+			else return true;
+		}
+		else if (piece.getPlayer() == this.game.player1) {
+		if (boardArray[piece.getX()][piece.getY()] != null) {
+			if (boardArray[piece.getX()][piece.getY()].getPlayer().equals(this.game.player1)){
+				return false;
+			}
+			else return true;
+		}
+		else return true;
+		}
+		}
+		return true;
+	}
+
+	public boolean isOnBoard(Piece piece, int finalX, int finalY) {	
 		if((0 <= finalX && finalX < width) && (0 <= finalY && finalY < height)) {
+			return true;
+		}
+		else return false;
+	}
+	
+	public boolean isActuallyMoved(Piece piece, int finalX, int finalY) {
+		if((finalX == piece.getX()) && (finalY == piece.getY())) {
 			return true;
 		}
 		else return false;
