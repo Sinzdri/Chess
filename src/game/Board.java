@@ -2,6 +2,7 @@ package game;
 
 import java.util.ArrayList;
 
+import enums.Type;
 import pieces.*;
 
 public class Board {
@@ -66,24 +67,24 @@ public class Board {
         for(Piece p : blackPieces) {
         	boardArray[p.getX()][p.getY()] = p;	
         }
-
+        whitePieces.clear();
+        blackPieces.clear();
+        //clear arraylists to use to store captured pieces
 
     }
 	
     //Piece moving methods below (Maybe split into own class)
     //Combined method that checks if move is valid for generic piece, and then if path is valid for that specific piece. 
-    //Todo add logic for taking pieces, need to record them in an arraylist (reuse white black pieces arraylist by having it wiped after initial use?)
+    //Todo sort out movement path logic, currently no checks about moving through pieces.
 	public void movePiece(Piece piece, int finalX, int finalY) {
 		if(isMoveValid(piece, finalX, finalY) && piece.isPathValid(finalX, finalY)) {
-			int originX = piece.getX();
-			int originY = piece.getY();
-			piece.setX(finalX); 
-			piece.setY(finalY);
-			boardArray[finalX][finalY] = piece;			
-			boardArray[originX][originY] = null;			
+			isCapture(piece, finalX, finalY);
+			
+			setNewPosition(piece, finalX, finalY);
 		}
 	}
 	
+
 	//use to check validity of move in general regardless of piece type (in the board etc.), need to expand (break into seperate methods) to also cover if destination is the same as origin
 	//and if destination is occupied (if friendly piece not valid if enemy need capture method).
 	public boolean isMoveValid(Piece piece, int finalX, int finalY) {	
@@ -130,6 +131,43 @@ public class Board {
 		else return false;
 	}
 	
+	//method to check if capturing a piece or not
+	public boolean isCapture(Piece piece, int finalX, int finalY) {
+		if(boardArray[finalX][finalY] != null && boardArray[finalX][finalY].getPlayer() != piece.getPlayer()) {
+			if(boardArray[finalX][finalY].getType() == Type.KING)
+				boardArray[finalX][finalY].getPlayer().hasLost = true; //If we are actually capturing a piece then if it is the king that player has lost
+			storeCaptured(finalX, finalY);	//stores the captured piece to that colours arraylist
+			return true;
+		}
+		else return false;
+	}
+	
+	//method to change position of a piece
+	public void setNewPosition(Piece piece, int finalX, int finalY) {
+		int originX = piece.getX();
+		int originY = piece.getY();
+		piece.setX(finalX); 
+		piece.setY(finalY);
+		boardArray[finalX][finalY] = piece;			
+		boardArray[originX][originY] = null;	
+	}
+	
+	//method to store captured pieces in arraylist
+	public void storeCaptured(int finalX, int finalY) {
+		if (boardArray[finalX][finalY].getPlayer() == this.game.player1) {
+			whitePieces.add(boardArray[finalX][finalY]);
+		}
+		if (boardArray[finalX][finalY].getPlayer() == this.game.player2) {
+			blackPieces.add(boardArray[finalX][finalY]);
+		}
+	}
+	
+	//method to check movement path is empty
+	public boolean isPathClear(Piece piece, int finalX, int finalY) {
+		
+	}
+	
+	//boardarray getter
 	public Piece[][] getBoardArray() {
 		return boardArray;
 	}

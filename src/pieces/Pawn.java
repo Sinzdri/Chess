@@ -33,7 +33,7 @@ public class Pawn extends Piece {	//todo, maybe break up valid path and have met
 		
 	}
 	
-	public boolean enemyPresent(int finalX, int finalY) {
+	public boolean enemyPresent(int finalX, int finalY) {	//shouldn't need to worry about friendly present as already checked with generic move check
 		Piece[][] board = this.getPlayer().playerGame.gameBoard.getBoardArray();
 		if(board[finalX][finalY] == null) {
 			return false;
