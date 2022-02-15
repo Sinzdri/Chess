@@ -5,7 +5,7 @@ import game.Player;
 
 public class Pawn extends Piece {	//todo, maybe break up valid path and have methods for each type of conditional movement a pawn would make.
 	private Type type;
-	boolean hasMoved = false;	//will need a method to track if pawn has moved since needed for double move (probably just have boolean change in move method).
+//	boolean hasMoved = false;	//will need a method to track if pawn has moved since needed for double move (probably just have boolean change in move method).
 
 	public Pawn(int x, int y, Player player) {
 		super(x, y, player);
@@ -22,7 +22,7 @@ public class Pawn extends Piece {	//todo, maybe break up valid path and have met
 		if (y_difference == 1 && x_difference == 0 && enemyPresent == false) {
 			return true;
 		}
-		else if (y_difference == 2 && x_difference == 0 && hasMoved == false && enemyPresent == false) {	//if has not moved can move twice
+		else if (y_difference == 2 && x_difference == 0 && getMoved() == false && enemyPresent == false) {	//if has not moved can move twice
 			return true;
 		}
 		else if (x_difference == 1 && y_difference == 1 && enemyPresent == true) {

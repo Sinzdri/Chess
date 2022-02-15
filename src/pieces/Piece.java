@@ -6,6 +6,7 @@ import game.Player;
 public abstract class Piece {
 	private int x, y;
 	private Player player;
+	private boolean hasMoved = false;
 
 	//constructor
 	public Piece(int x, int y, Player player) {
@@ -41,4 +42,13 @@ public abstract class Piece {
 	public void setPlayer(Player player) {
 		this.player = player;
 	}
+	
+	public void setMoved(boolean x) {
+		this.hasMoved = x;
+	}
+	
+	public boolean getMoved() {
+		return hasMoved;
+	}
+	
 }
