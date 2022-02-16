@@ -81,6 +81,9 @@ public class Board {
 			isCapture(piece, finalX, finalY);
 			
 			setNewPosition(piece, finalX, finalY);
+			if (piece.getType() == Type.PAWN){
+				piece.setMoved(true);
+			}
 		}
 	}
 	
@@ -164,6 +167,7 @@ public class Board {
 	
 	//method to check movement path is empty
 	public boolean isPathClear(Piece piece, int finalX, int finalY) {
+		return false;	//todo
 		
 	}
 	

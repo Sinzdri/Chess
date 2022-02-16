@@ -18,12 +18,15 @@ public class Bishop extends Piece {
 		return x_difference == y_difference;
 	}
 	
-	public boolean getPath(int x, int y, int finalX, int finalY) {
-		int dirX = finalX > x ? 1 : -1;	// if x is increasing then directions is +1, -1 if reducing
-		int dirY = finalY > y ? 1 : -1;	// if y is increasing then directions is +1, -1 if reducing
-		for (int i=1; i < Math.abs(finalX - x) -1; ++i){
-			
+	public int[][] getPath(int finalX, int finalY) {
+		int dirX = finalX > getX() ? 1 : -1;	// if x is increasing then direction is +1, -1 if reducing
+		int dirY = finalY > getY() ? 1 : -1;	// if y is increasing then direction is +1, -1 if reducing
+		int [][] path = new int[2][Math.abs(finalX - getX())];	//2d array to store path taken
+		for (int i=1; i < Math.abs(finalX - getX()) -1; ++i){	//increments through array for length of path, using directions to calculate path taken
+			path[0][i] = getX() + dirX*1;
+			path[1][i] = getY() + dirY*1;
 		}
+		return path;
 	}
 	
 

@@ -12,8 +12,8 @@ public class King extends Piece {
 	}
 	
 	public boolean isPathValid(int finalX, int finalY) {
-		int x_difference = finalX - getX();
-		int y_difference = finalY - getY();
+		int x_difference = Math.abs(finalX - getX());
+		int y_difference = Math.abs(finalY - getY());
 		if (x_difference <= 1 && y_difference <=1 ) {
 			return true;}
 		else return false;
@@ -24,6 +24,11 @@ public class King extends Piece {
 
 	public Type getType() {
 		return type;
+	}
+
+	@Override
+	public int[][] getPath(int finalX, int finalY) {
+		return null;	//todo
 	}
 
 

@@ -6,7 +6,7 @@ import game.Player;
 public abstract class Piece {
 	private int x, y;
 	private Player player;
-	private boolean hasMoved = false;
+	private boolean hasMoved = false;	//not sure about including this here, lazy workaround for pawn logic
 
 	//constructor
 	public Piece(int x, int y, Player player) {
@@ -18,6 +18,7 @@ public abstract class Piece {
 	//methods
 	public abstract boolean isPathValid(int finalX, int finalY); //method to determine if piece can make the move
 	public abstract Type getType(); //method to get piece type
+	public abstract int[][] getPath(int finalX, int finalY);	//method to store path taken by piece (primarily needed to check if path clear)
 
 	public int getX() {
 		return x;
@@ -50,5 +51,6 @@ public abstract class Piece {
 	public boolean getMoved() {
 		return hasMoved;
 	}
+	
 	
 }

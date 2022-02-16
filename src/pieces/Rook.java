@@ -23,5 +23,9 @@ public class Rook extends Piece {
 		return type;
 	}
 
+	public int[][] getPath(int finalX, int finalY) {
+		return null;	//todo
+	}
+
 
 }

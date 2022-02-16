@@ -15,8 +15,8 @@ public class Pawn extends Piece {	//todo, maybe break up valid path and have met
 	//method to determine if pawn move is valid
 	public boolean isPathValid(int finalX, int finalY) {
 
-		int x_difference = finalX - getX();
-		int y_difference = finalY - getY();
+		int x_difference = Math.abs(finalX - getX());
+		int y_difference = Math.abs(finalY - getY());
 		
 		boolean enemyPresent = enemyPresent(finalX, finalY);	
 		if (y_difference == 1 && x_difference == 0 && enemyPresent == false) {
@@ -46,6 +46,10 @@ public class Pawn extends Piece {	//todo, maybe break up valid path and have met
 
 	public Type getType() {
 		return type;
+	}
+
+	public int[][] getPath(int finalX, int finalY) {
+		return null;	//todo
 	}
 
 
