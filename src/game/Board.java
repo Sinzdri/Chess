@@ -88,10 +88,10 @@ public class Board {
 	}
 	
 
-	//use to check validity of move in general regardless of piece type (in the board etc.), need to expand (break into seperate methods) to also cover if destination is the same as origin
-	//and if destination is occupied (if friendly piece not valid if enemy need capture method).
+	//use to check validity of move in general regardless of piece type (in the board etc.)
 	public boolean isMoveValid(Piece piece, int finalX, int finalY) {	
-		if((isOnBoard(piece, finalX, finalY)) && (isActuallyMoved(piece, finalX, finalY)) && (isNotFriend(piece, finalX, finalY))) {
+		int [][] path = piece.getPath(finalX, finalY);
+		if((isOnBoard(piece, finalX, finalY)) && (isActuallyMoved(piece, finalX, finalY)) && (isNotFriend(piece, finalX, finalY)) && (isPathClear(piece, path))) {
 			return true;
 		}
 		else return false;
@@ -166,8 +166,19 @@ public class Board {
 	}
 	
 	//method to check movement path is empty
-	public boolean isPathClear(Piece piece, int finalX, int finalY) {
-		return false;	//todo
+	public boolean isPathClear(Piece piece, int[][] path) {
+		if(piece.getType() == Type.KNIGHT) {		//doesn't matter for knights
+			return true;
+		}
+		for(int i = 0; i < path.length - 1; i++) {	
+			if(boardArray[path[0][i]][path[1][i]] != null) { //checking along path to ensure spaces are empty
+				return false;
+			}
+		}
+		return true;
+		
+		
+		
 		
 	}
 	
