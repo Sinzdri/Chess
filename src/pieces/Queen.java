@@ -27,9 +27,45 @@ public class Queen extends Piece {
 		return type;
 	}
 
-	@Override
-	public int[][] getPath(int finalX, int finalY) {
-		return null;	//todo
+	public int[][] getPath(int finalX, int finalY) {	//different form for direction logic
+		int length;
+		int dirX = 0;
+		int dirY = 0;
+		if(finalX == getX()) {		//purely vertical movement
+			length = Math.abs(finalY - getY());
+			if(finalY - getY() < 0) {
+				dirX = -1;
+			}
+			else {
+				dirY = 1;
+			}
+		}
+		
+		else if(finalY == getY()) {		//purely horizontal movement
+			length = Math.abs(finalX - getX());
+			if(finalX - getX() < 0) {
+				dirX = -1;
+			}
+			else {
+				dirY = 1;
+			}
+		}
+		
+		else {
+			length = Math.abs(finalX - getX());
+			if(finalX - getX() > 0) {
+				dirX = -1;
+			}
+			else dirX = 1;
+			if(finalY - getY() > 0) {
+				dirY = -1;
+			}
+			else dirX = 1;
+		}
+		
+		int[][] path = new int[2][length];
+		
+		
 	}
 
 

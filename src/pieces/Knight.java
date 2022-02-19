@@ -25,9 +25,8 @@ public class Knight extends Piece {
 		return type;
 	}
 
-	@Override
 	public int[][] getPath(int finalX, int finalY) {
-		return null;	//todo
+		return null;
 	}
 
 
