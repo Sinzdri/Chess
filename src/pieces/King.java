@@ -26,9 +26,9 @@ public class King extends Piece {
 		return type;
 	}
 
-	@Override
 	public int[][] getPath(int finalX, int finalY) {
-		return null;	//todo
+		int length = 0;	//should never leave a path as only moves one space
+		return new int[2][length];	
 	}
 
 

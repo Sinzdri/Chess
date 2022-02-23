@@ -22,7 +22,7 @@ public class Pawn extends Piece {	//todo, maybe break up valid path and have met
 		if (y_difference == 1 && x_difference == 0 && enemyPresent == false) {
 			return true;
 		}
-		else if (y_difference == 2 && x_difference == 0 && getMoved() == false && enemyPresent == false) {	//if has not moved can move twice
+		else if (y_difference == 2 && x_difference == 0 && getMoved() == false && enemyPresent == false && ) {	//if has not moved can move twice
 			return true;
 		}
 		else if (x_difference == 1 && y_difference == 1 && enemyPresent == true) {
@@ -32,6 +32,8 @@ public class Pawn extends Piece {	//todo, maybe break up valid path and have met
 		
 		
 	}
+	
+	//todo new logic to account for pawns only being able to move forward, will need to use colour/player.
 	
 	public boolean enemyPresent(int finalX, int finalY) {	//shouldn't need to worry about friendly present as already checked with generic move check
 		Piece[][] board = this.getPlayer().playerGame.gameBoard.getBoardArray();
@@ -49,7 +51,12 @@ public class Pawn extends Piece {	//todo, maybe break up valid path and have met
 	}
 
 	public int[][] getPath(int finalX, int finalY) {
-		return null;	//todo
+		int length = Math.abs(finalY - getY());
+		int[][] path = new int [2][length];
+		
+		return path;
+		//todo, since only has a path in circumstances of double move forward maybe alternative check in only those circumstances and avoid calling path for pawn?
+				
 	}
 
 

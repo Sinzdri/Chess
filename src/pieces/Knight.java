@@ -25,8 +25,9 @@ public class Knight extends Piece {
 		return type;
 	}
 
-	public int[][] getPath(int finalX, int finalY) {
-		return null;
+	public int[][] getPath(int finalX, int finalY) {	//should never need to be used since path is not relevant for knight movements (breaking 
+		int[][] path = new int[2][0];	
+		return path;
 	}
 
 

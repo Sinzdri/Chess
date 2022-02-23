@@ -51,7 +51,7 @@ public class Queen extends Piece {
 			}
 		}
 		
-		else {
+		else {	//diagonal movement
 			length = Math.abs(finalX - getX());
 			if(finalX - getX() > 0) {
 				dirX = -1;
@@ -64,6 +64,14 @@ public class Queen extends Piece {
 		}
 		
 		int[][] path = new int[2][length];
+		
+		while (length > 0) {
+			for(int i = 0; i < length - 1; i++) {
+				path[0][i] = getX() + dirX*1;
+				path[1][i] = getY() + dirY*1;
+			}
+		}
+		return path;
 		
 		
 	}
