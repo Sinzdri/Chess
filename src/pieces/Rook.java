@@ -31,7 +31,7 @@ public class Rook extends Piece {
 		if(finalX == getX()) {		//vertical movement
 			length = Math.abs(finalY - getY());
 			if(finalY - getY() < 0) {
-				dirX = -1;
+				dirY = -1;
 			}
 			else {
 				dirY = 1;
@@ -44,7 +44,7 @@ public class Rook extends Piece {
 				dirX = -1;
 			}
 			else {
-				dirY = 1;
+				dirX = 1;
 			}
 		}
 		

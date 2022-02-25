@@ -22,7 +22,7 @@ public class Pawn extends Piece {	//todo, maybe break up valid path and have met
 		if (y_difference == 1 && x_difference == 0 && enemyPresent == false) {
 			return true;
 		}
-		else if (y_difference == 2 && x_difference == 0 && getMoved() == false && enemyPresent == false && ) {	//if has not moved can move twice
+		else if (y_difference == 2 && x_difference == 0 && getMoved() == false && enemyPresent == false ) {	//if has not moved can move twice
 			return true;
 		}
 		else if (x_difference == 1 && y_difference == 1 && enemyPresent == true) {
@@ -52,8 +52,23 @@ public class Pawn extends Piece {	//todo, maybe break up valid path and have met
 
 	public int[][] getPath(int finalX, int finalY) {
 		int length = Math.abs(finalY - getY());
+		int dirX = 0;
+		int dirY = 0;
 		int[][] path = new int [2][length];
 		
+		if(finalY - getY() < 0) {
+			dirY = -1;
+		}
+		else {
+			dirY = 1;
+		}
+		
+		while (length > 0) {
+			for(int i = 0; i < length - 1; i++) {
+				path[0][i] = getX() + dirX*1;
+				path[1][i] = getY() + dirY*1;
+			}
+		}
 		return path;
 		//todo, since only has a path in circumstances of double move forward maybe alternative check in only those circumstances and avoid calling path for pawn?
 				
