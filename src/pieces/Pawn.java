@@ -1,5 +1,6 @@
 package pieces;
 
+import enums.Colour;
 import enums.Type;
 import game.Player;
 
@@ -18,14 +19,15 @@ public class Pawn extends Piece {	//todo, maybe break up valid path and have met
 		int x_difference = Math.abs(finalX - getX());
 		int y_difference = Math.abs(finalY - getY());
 		
+		boolean rightDirection = rightDirection(finalX, finalY);
 		boolean enemyPresent = enemyPresent(finalX, finalY);	
-		if (y_difference == 1 && x_difference == 0 && enemyPresent == false) {
+		if (y_difference == 1 && x_difference == 0 && enemyPresent == false && rightDirection == true) {
 			return true;
 		}
-		else if (y_difference == 2 && x_difference == 0 && getMoved() == false && enemyPresent == false ) {	//if has not moved can move twice
+		else if (y_difference == 2 && x_difference == 0 && getMoved() == false && enemyPresent == false && rightDirection == true ) {	//if has not moved can move twice
 			return true;
 		}
-		else if (x_difference == 1 && y_difference == 1 && enemyPresent == true) {
+		else if (x_difference == 1 && y_difference == 1 && enemyPresent == true && rightDirection == true) {
 			return true;
 		}
 		else return false;
@@ -33,8 +35,18 @@ public class Pawn extends Piece {	//todo, maybe break up valid path and have met
 		
 	}
 	
-	//todo new logic to account for pawns only being able to move forward, will need to use colour/player.
+	//method to determine if pawn is moving in the right direction
+	public boolean rightDirection(int finalX, int finalY) {
+		int y_difference = finalY - getY();
+		
+		if((this.getPlayer().playerColour == Colour.WHITE && y_difference > 0)
+			|| (this.getPlayer().playerColour == Colour.BLACK && y_difference < 0)) {
+			return true;
+		}
+		return false;
+	}
 	
+	//method to determine if enemy is present on destination
 	public boolean enemyPresent(int finalX, int finalY) {	//shouldn't need to worry about friendly present as already checked with generic move check
 		Piece[][] board = this.getPlayer().playerGame.gameBoard.getBoardArray();
 		if(board[finalX][finalY] == null) {
@@ -49,7 +61,7 @@ public class Pawn extends Piece {	//todo, maybe break up valid path and have met
 	public Type getType() {
 		return type;
 	}
-
+	
 	public int[][] getPath(int finalX, int finalY) {
 		int length = Math.abs(finalY - getY());
 		int dirX = 0;
