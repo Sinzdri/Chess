@@ -20,6 +20,13 @@ public void setupGame() {
 	turn = 1;
 }
 
+//public void testsetupGame() {
+//	setupPlayers(); //setup the players
+//	gameBoard = new Board(8,8, this); //setup a game with players and chess board
+//	//gameBoard.setBoard(); don't want to set up pieces for any tests, will manually add pieces.
+//	turn = 1;
+//}
+
 public void setupPlayers() {
 	player1 = new Player(Colour.WHITE, true); //white player goes first
 	player2 = new Player(Colour.BLACK, false);

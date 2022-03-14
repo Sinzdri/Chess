@@ -79,7 +79,6 @@ public class Board {
 	public void movePiece(Piece piece, int finalX, int finalY) {
 		if(isMoveValid(piece, finalX, finalY) && piece.isPathValid(finalX, finalY)) {
 			isCapture(piece, finalX, finalY);
-			
 			setNewPosition(piece, finalX, finalY);
 			if (piece.getType() == Type.PAWN){
 				piece.setMoved(true);
@@ -99,24 +98,13 @@ public class Board {
 	
 	//method to check not moving into occupied friendly space
 	public boolean isNotFriend(Piece piece, int finalX, int finalY) {
-		if (piece.getPlayer() == this.game.player1) {
-		if (boardArray[piece.getX()][piece.getY()] != null) {
-			if (boardArray[piece.getX()][piece.getY()].getPlayer().equals(this.game.player1)){
-				return false;
-			}
-			else return true;
-		}
-		else if (piece.getPlayer() == this.game.player1) {
-		if (boardArray[piece.getX()][piece.getY()] != null) {
-			if (boardArray[piece.getX()][piece.getY()].getPlayer().equals(this.game.player1)){
-				return false;
-			}
-			else return true;
-		}
-		else return true;
-		}
-		}
-		return true;
+        if((boardArray[finalX][finalY] == null)|| //if final destination is empty then true
+          ((boardArray[finalX][finalY] != null) && boardArray[finalX][finalY].getPlayer() != piece.getPlayer())) //or if final destination is occupied but different player then also true
+        {
+            return true;
+        }
+
+        return false;
 	}
 	
 	//method to check not leaving confines of the board
@@ -135,14 +123,14 @@ public class Board {
 	}
 	
 	//method to check if capturing a piece or not
-	public boolean isCapture(Piece piece, int finalX, int finalY) {
+	public void isCapture(Piece piece, int finalX, int finalY) {
 		if(boardArray[finalX][finalY] != null && boardArray[finalX][finalY].getPlayer() != piece.getPlayer()) {
 			if(boardArray[finalX][finalY].getType() == Type.KING)
 				boardArray[finalX][finalY].getPlayer().hasLost = true; //If we are actually capturing a piece then if it is the king that player has lost
 			storeCaptured(finalX, finalY);	//stores the captured piece to that colours arraylist
-			return true;
+//			return true;
 		}
-		else return false;
+//		else return false;
 	}
 	
 	//method to change position of a piece
